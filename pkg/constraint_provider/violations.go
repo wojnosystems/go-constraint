@@ -11,7 +11,7 @@ type violations struct {
 	collection   map[string][]constraint.Infringer
 }
 
-func NewViolations() constraint.KeepMutator {
+func NewViolations() constraint.ViolationMutater {
 	return &violations{
 		violationSum: 0,
 		collection:   make(map[string][]constraint.Infringer),
@@ -57,7 +57,7 @@ func (v *violations) Append(path go_path.Pather, violation constraint.Infringer)
 	v.violationSum++
 }
 
-func (v *violations) Merge(tailingPath go_path.Pather, mergeFrom constraint.ViolationContainer) (new constraint.KeepMutator) {
+func (v *violations) Merge(tailingPath go_path.Pather, mergeFrom constraint.ViolationContainer) (new constraint.ViolationMutater) {
 	new = NewViolations()
 	for key, violaters := range v.collection {
 		path, _ := go_path.Parse(bytes.NewBufferString(key))

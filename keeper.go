@@ -29,10 +29,10 @@ type ViolationMerger interface {
 	// Merge the violations in one ViolationContainer into the caller.
 	// The violations' current path is appended to the path provided by the caller
 	// so that the violations appear to be children of that path
-	Merge(go_path.Pather, ViolationContainer) KeepMutator
+	Merge(go_path.Pather, ViolationContainer) ViolationMutater
 }
 
-type KeepMutator interface {
+type ViolationMutater interface {
 	ViolationContainer
 	ViolationAppender
 	ViolationMerger

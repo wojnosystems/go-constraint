@@ -11,17 +11,17 @@ func TestViolations_Append(t *testing.T) {
 	name := "name"
 	remedy := "remedy"
 	cases := map[string]struct {
-		setUp             func() constraint.KeepMutator
+		setUp             func() constraint.ViolationMutater
 		expectedPathCount int
 		expectedLen       int
 	}{
 		"do nothing": {
-			setUp: func() constraint.KeepMutator {
+			setUp: func() constraint.ViolationMutater {
 				return NewViolations()
 			},
 		},
 		"one": {
-			setUp: func() constraint.KeepMutator {
+			setUp: func() constraint.ViolationMutater {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
@@ -32,7 +32,7 @@ func TestViolations_Append(t *testing.T) {
 			expectedLen:       1,
 		},
 		"two": {
-			setUp: func() constraint.KeepMutator {
+			setUp: func() constraint.ViolationMutater {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
@@ -46,7 +46,7 @@ func TestViolations_Append(t *testing.T) {
 			expectedLen:       2,
 		},
 		"two same path": {
-			setUp: func() constraint.KeepMutator {
+			setUp: func() constraint.ViolationMutater {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
