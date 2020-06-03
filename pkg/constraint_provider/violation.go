@@ -3,19 +3,19 @@ package constraint_provider
 import "github.com/wojnosystems/go-constraint"
 
 type violation struct {
-	summary string
-	remedy  string
+	name   string
+	remedy string
 }
 
-func NewViolation(summary string, remedy string) constraint.Infringer {
+func NewViolation(name string, remedy string) constraint.Infringer {
 	return &violation{
-		summary: summary,
-		remedy:  remedy,
+		name:   name,
+		remedy: remedy,
 	}
 }
 
-func (v *violation) Summary() string {
-	return v.summary
+func (v *violation) Name() string {
+	return v.name
 }
 func (v *violation) Remedy() string {
 	return v.remedy

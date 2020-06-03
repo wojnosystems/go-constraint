@@ -8,6 +8,8 @@ import (
 )
 
 func TestViolations_Append(t *testing.T) {
+	name := "name"
+	remedy := "remedy"
 	cases := map[string]struct {
 		setUp             func() constraint.KeepMutator
 		expectedPathCount int
@@ -23,7 +25,7 @@ func TestViolations_Append(t *testing.T) {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
-				v.Append(r, NewViolation("test"))
+				v.Append(r, NewViolation(name, remedy))
 				return v
 			},
 			expectedPathCount: 1,
@@ -34,10 +36,10 @@ func TestViolations_Append(t *testing.T) {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
-				v.Append(r, NewViolation("test"))
+				v.Append(r, NewViolation(name, remedy))
 				r = go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test2"))
-				v.Append(r, NewViolation("test2"))
+				v.Append(r, NewViolation(name, remedy))
 				return v
 			},
 			expectedPathCount: 2,
@@ -48,8 +50,8 @@ func TestViolations_Append(t *testing.T) {
 				v := NewViolations()
 				r := go_path.NewRoot()
 				r.Append(go_path.NewInstanceVariableNamed("test"))
-				v.Append(r, NewViolation("test"))
-				v.Append(r, NewViolation("test2"))
+				v.Append(r, NewViolation(name, remedy))
+				v.Append(r, NewViolation(name, remedy))
 				return v
 			},
 			expectedPathCount: 1,
